@@ -1,0 +1,104 @@
+Bạn đang tiếp tục công việc với HAI package ContextBridge đến từ HAI cuộc trò chuyện ChatGPT độc lập.
+
+Hai package này có thể là hai project, chủ đề, workflow hoặc workstream hoàn toàn không liên quan. Nhiệm vụ của bạn là tái dựng chính xác cả hai context, giữ riêng state của từng project và tiếp tục công việc mà không trộn nhầm rule, file, version hoặc decision.
+
+NGUYÊN TẮC GỘP CỐT LÕI
+- Xem hai package là CONTEXT A và CONTEXT B.
+- Không mặc định chúng có liên quan.
+- Không để rule cục bộ của project này ghi đè project kia.
+- Giữ cả hai context hoạt động trong chat hiện tại.
+- Chỉ gộp preference thực sự mang tính global hoặc nội dung mà tôi chủ động yêu cầu kết hợp.
+
+1. XÁC ĐỊNH CẢ HAI CONTEXT
+Với CONTEXT A và CONTEXT B, hãy tái dựng riêng:
+- project/chủ đề là gì và mục đích
+- state/version mới nhất
+- architecture và workflow
+- hướng UI/UX
+- terminology và naming convention
+- protocol đang hoạt động
+- phần đã hoàn thành
+- phần chưa hoàn thành
+- bug và limitation
+- file, asset và build liên quan mới nhất
+- ý định gần nhất của user
+
+Giữ hai namespace nội bộ riêng. Version, file, variable, keyword hoặc concept ở A không tự động là cùng một thứ ở B.
+
+2. THỨ TỰ NGUỒN TRONG TỪNG PACKAGE
+Trong từng package, ưu tiên:
+1) handoff/CONTINUE.md
+2) handoff/context.json
+3) protocol/preference/configuration data
+4) archive/conversation.md và archive/conversation.json
+5) outputs/
+6) các file project khác
+
+Trong từng conversation, decision mới hơn đã được user xác nhận sẽ thay decision cũ. Decision do user đặt ra có độ ưu tiên cao hơn suggestion cũ của assistant chưa được chấp nhận.
+
+3. PROTOCOL GLOBAL VÀ PROTOCOL CỤC BỘ
+Phân loại protocol thành:
+GLOBAL USER PROTOCOLS - preference bền vững có thể áp dụng nhiều conversation như response style, format, language preference hoặc workflow chung.
+PROJECT-LOCAL PROTOCOLS - architecture, naming, API, storage, UI terminology, compatibility, deployment hoặc rule chỉ thuộc một project.
+
+Chỉ áp dụng global protocol cho cả workspace khi có evidence rõ rằng nó thật sự global. Không mang local protocol từ A sang B chỉ vì nó có vẻ hữu ích.
+
+4. KIỂM TRA CONFLICT GIỮA HAI CONTEXT
+Tìm các conflict tiềm năng như:
+- cùng thuật ngữ nhưng khác ý nghĩa
+- cùng filename nhưng thuộc hai project khác nhau
+- coding/UI convention không tương thích
+- security/authentication model khác nhau
+- versioning system khác nhau
+- label như keyword, field, release, build, draft, schedule mang nghĩa khác nhau
+- global preference mâu thuẫn
+
+Phân loại từng rule là GLOBAL, A-ONLY, B-ONLY hoặc CONFLICTING. Không âm thầm chọn một bên khi conflict thật sự ảnh hưởng yêu cầu.
+
+5. ROUTE YÊU CẦU TIẾP THEO
+Với mỗi message mới, xác định nó thuộc A, B hay cả hai dựa trên tên project, file, version, terminology, feature và recent discussion.
+- Nếu rõ là A, dùng A.
+- Nếu rõ là B, dùng B.
+- Nếu tôi yêu cầu kết hợp cả hai, dùng cả hai.
+- Nếu có thể thuộc cả hai và không đủ evidence để xác định, hỏi đúng một clarification cụ thể.
+
+6. CHUYỂN FEATURE GIỮA PROJECT
+Nếu tôi yêu cầu chuyển feature, idea, protocol, architecture hoặc implementation từ context này sang context kia:
+- xác định source và destination
+- giữ constraint của destination
+- audit compatibility và side effect
+- adapt thay vì copy mù quáng
+- không ghi đè decision không liên quan của destination
+
+7. AN TOÀN VERSION VÀ FILE
+Trong từng context:
+- xác định working version mới nhất
+- không downgrade sang file cũ
+- chỉ dùng historical version cho debug/regression analysis
+- không nhầm file A và B chỉ vì cùng tên
+- khi sửa file phải dùng đúng source của đúng project
+
+8. CÁCH LY SECURITY
+Không chuyển credential, secret, OAuth config, API key, session material, private identifier hoặc authentication assumption giữa hai context trừ khi tôi chủ động yêu cầu migration hợp lệ. Giữ security boundary của từng project riêng.
+
+9. DEVELOPMENT VÀ DEBUGGING
+Xem mỗi context là project đang tồn tại, không phải blank slate. Giữ feature đang chạy. Trước update lớn, kiểm tra regression, migration, dependency, permission, API change, browser/platform assumption và source hiện tại. Không lặp lại fix mà archive của context đó cho thấy đã thất bại.
+
+10. KHI KHÔNG CHẮC CHẮN
+Không bịa ra mối quan hệ giữa hai package. Nếu thiếu dữ liệu quan trọng, nói rõ thiếu gì và chỉ hỏi clarification nhỏ nhất cần thiết.
+
+11. KIỂM TRA WORKSPACE BAN ĐẦU
+Trước response substantive đầu tiên, tự xác định:
+- identity/state của A
+- identity/state của B
+- global protocol
+- A-only protocol
+- B-only protocol
+- conflict giữa hai context
+- version/file mới nhất của từng bên
+- yêu cầu hiện tại của tôi đang route tới context nào
+
+Không cần output recap dài trừ khi tôi yêu cầu.
+
+NGUYÊN TẮC CUỐI
+Xem chat này là một workspace chứa HAI context độc lập đã import. Giữ cả hai. Tự route yêu cầu tiếp theo vào đúng context. Không trộn thông tin project-local trừ khi tôi chủ động yêu cầu kết hợp hoặc chuyển giao.

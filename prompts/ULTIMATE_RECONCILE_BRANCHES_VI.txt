@@ -1,0 +1,179 @@
+Bạn đang HỢP NHẤT HAI package ContextBridge có CHUNG một lịch sử project ban đầu nhưng sau đó tách thành hai nhánh ChatGPT khác nhau.
+
+Xem chúng là BRANCH A và BRANCH B. Nhiệm vụ của bạn KHÔNG phải học lại toàn bộ project từ đầu. Hãy xác định shared baseline, tách riêng delta sau điểm tách nhánh, tìm conflict/regression và tái dựng một current state tương thích duy nhất.
+
+NGUYÊN TẮC HỢP NHẤT CỐT LÕI
+- Giữ shared baseline.
+- Tập trung phân tích thay đổi sau branch point.
+- Gộp các improvement tương thích từ cả hai nhánh.
+- Ưu tiên explicit user decision mới hơn khi nó rõ ràng thay decision cũ.
+- Không mặc định branch có version number cao hơn là đúng hơn.
+- Nếu conflict thật sự chưa thể resolve, phải surface thay vì đoán.
+
+1. XÁC ĐỊNH SHARED BASELINE
+Tìm trạng thái chung trước khi hai nhánh tách:
+- project identity và mục tiêu
+- architecture và workflow
+- protocol đang hoạt động
+- terminology và naming
+- feature đã implement
+- file và version
+- security/auth model
+- hướng UI/UX
+- user requirement
+
+Lịch sử giống nhau ở cả hai package chỉ được xem là một BASELINE, không phải hai nguồn độc lập cần đánh giá lại.
+
+2. XÁC ĐỊNH BRANCH POINT
+Xác định thời điểm A và B ngừng tương đương. Sau đó tập trung chủ yếu vào DELTA sau điểm này.
+
+Với BRANCH A và BRANCH B, xác định riêng:
+- feature mới
+- behavior bị sửa hoặc xóa
+- bug fix
+- architecture change
+- protocol change
+- UI/UX change
+- file change
+- version change
+- limitation hoặc bug mới
+- correction của user
+- phần chưa hoàn thành
+
+3. PHÂN LOẠI THAY ĐỔI SAU BRANCH
+Mỗi thay đổi đáng kể được phân loại:
+- COMPATIBLE - có thể cùng tồn tại
+- SUPERSEDED - decision mới hơn đã thay decision cũ
+- A-ONLY - chỉ A có
+- B-ONLY - chỉ B có
+- CONFLICT - cả hai sửa cùng behavior nhưng không tương thích
+- REGRESSION RISK - thay đổi có thể làm hỏng baseline hoặc feature của branch kia
+- UNKNOWN - chưa đủ evidence
+
+Không âm thầm coi UNKNOWN là compatible.
+
+4. THỨ TỰ ƯU TIÊN DECISION
+Resolve conflict theo thứ tự:
+1) instruction mới nhất của tôi trong chat hiện tại
+2) instruction post-branch mới nhất
+3) user decision mới hơn được xác định rõ ở một branch
+4) implementation mới hơn đã thật sự được chấp nhận và tiếp tục sử dụng
+5) shared baseline decision
+6) suggestion của assistant chưa được user chấp nhận
+
+Chronology một mình chưa đủ nếu thay đổi mới hơn chỉ là thử nghiệm, đã bị từ chối hoặc bị rollback.
+
+5. POTENTIAL CONFLICT AUDIT
+Kiểm tra đặc biệt conflict liên quan tới:
+- project version/release identity
+- architecture
+- file/folder structure
+- API
+- authentication và OAuth scope
+- extension/app ID và persistent key
+- database/storage schema
+- data migration
+- configuration format
+- naming và terminology
+- UI layout/interaction
+- scheduler/background worker
+- permission
+- security/privacy rule
+- dependency
+- platform/browser assumption
+- update procedure
+- backward compatibility
+- generated file format
+- shared state bị hai branch sửa qua các code path khác nhau
+
+6. REGRESSION AUDIT
+Kiểm tra branch nào vô tình làm mất functionality có trong baseline hoặc branch kia. Một feature không xuất hiện trong branch không có nghĩa là nó đã được chủ động xóa.
+
+Tìm các case như:
+- mất button/feature
+- mất migration logic
+- config cũ quay lại
+- localization thiếu string
+- schema cũ được restore nhầm
+- bug đã fix bị tái xuất hiện
+- code mới làm hỏng user data hiện tại
+
+7. HỢP NHẤT PROTOCOL
+Phân loại protocol thành:
+- UNCHANGED BASELINE PROTOCOLS
+- NEW A PROTOCOLS
+- NEW B PROTOCOLS
+- CONFLICTING PROTOCOLS
+
+Correction lặp lại của user được xem là protocol update. Nếu protocol mới hơn rõ ràng supersede protocol cũ thì dùng bản mới. Nếu không, giữ conflict cho đến khi có thể resolve an toàn.
+
+8. HỢP NHẤT FILE
+Không chọn file chỉ dựa vào filename. Xác định common ancestor, thay đổi của A, thay đổi của B và khả năng cùng tồn tại.
+
+Về logic:
+BASELINE + A DIFF + B DIFF -> RECONCILED VERSION
+
+Nếu hai thay đổi nằm ở chức năng khác nhau, giữ cả hai. Nếu chúng sửa cùng logic theo cách không tương thích, xác định conflict. Không dùng file cũ ghi đè working implementation mới chỉ vì file cũ có vẻ đầy đủ hơn.
+
+9. TÁI DỰNG VERSION
+Xác định:
+- baseline version/state
+- A latest state
+- B latest state
+- reconciled current state
+
+Không mặc định version number lớn nhất là truth cuối cùng vì hai branch có thể tăng version độc lập.
+
+10. MERGE STRATEGY
+Final state thông thường nên bằng:
+BASELINE
++ compatible A changes
++ compatible B changes
++ newest accepted decisions
+- obsolete decisions
+- confirmed regressions
+
+Không xóa feature riêng của một branch chỉ vì branch kia không có. Absence không đồng nghĩa deletion trừ khi lịch sử cho thấy user chủ động xóa.
+
+11. XỬ LÝ CONFLICT
+Nếu chronology và explicit user decision đủ để resolve, hãy resolve. Nếu còn hai hướng hợp lệ nhưng không tương thích và không bên nào supersede bên kia, không đoán. Chỉ nêu ngắn:
+- A đang làm gì
+- B đang làm gì
+- vì sao conflict
+- user cần quyết định đúng điểm nào
+
+12. SECURITY VÀ DATA SAFETY
+Giữ stable ID, OAuth config, secret handling, data schema, storage key, migration requirement và privacy protection khi lịch sử yêu cầu chúng ổn định. Không expose secret hoặc auth material từ bất kỳ branch nào.
+
+13. RECONCILED CURRENT STATE
+Sau khi hợp nhất, tạo một CURRENT STATE nội bộ duy nhất gồm:
+- architecture hiện tại
+- version/state hiện tại
+- protocol và terminology đang active
+- feature tương thích từ cả hai branch
+- bug fix đã resolve
+- file đang active
+- conflict còn mở
+- outstanding work
+- hướng mới nhất của user
+
+Từ đó về sau, dùng reconciled state này cho mọi công việc. Không tiếp tục chỉ chỉnh A hoặc chỉ chỉnh B.
+
+14. KIỂM TRA HỢP NHẤT BAN ĐẦU
+Trước response substantive đầu tiên, tự xác định:
+- shared baseline
+- branch point gần đúng
+- A-only change
+- B-only change
+- compatible change
+- superseded change
+- conflict
+- regression risk
+- protocol cuối cùng
+- file mới nhất có thể dùng
+- reconciled current state
+
+Không tự output comparison dài. Nếu còn conflict quan trọng, chỉ đưa Conflict Report ngắn cho những vấn đề thật sự ảnh hưởng task tiếp theo.
+
+NGUYÊN TẮC CUỐI
+Xem hai package là hai nhánh của cùng một project lịch sử. Giữ shared baseline, gộp improvement tương thích sau branch, ưu tiên user decision mới hơn đã được xác nhận, tìm regression, surface conflict thật sự và tiếp tục từ reconciled state thay vì bắt đầu lại project.

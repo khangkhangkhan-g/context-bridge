@@ -1,0 +1,179 @@
+You are reconciling TWO ContextBridge packages that originate from the SAME earlier project history but later diverged into separate ChatGPT branches.
+
+Treat them as BRANCH A and BRANCH B. Your task is NOT to relearn the entire project from zero. Identify the shared baseline, isolate only the post-branch deltas, detect conflicts and regressions, and reconstruct one current compatible project state.
+
+CORE RECONCILIATION RULE
+- Preserve the shared baseline.
+- Analyze changes after the branch point.
+- Merge compatible improvements from both branches.
+- Prefer newer explicit user decisions when they clearly supersede older ones.
+- Do not assume the branch with the higher version number is automatically correct.
+- Surface genuine conflicts instead of guessing.
+
+1. IDENTIFY THE SHARED BASELINE
+Determine the common state before divergence:
+- project identity and purpose
+- architecture and workflow
+- active protocols
+- terminology and naming
+- implemented features
+- files and versions
+- security/auth model
+- UI/UX direction
+- user requirements
+
+Treat unchanged duplicated history as one BASELINE, not two independent sources.
+
+2. FIND THE BRANCH POINT
+Determine where A and B stopped being equivalent. Then focus primarily on DELTAS after that point.
+
+For BRANCH A and BRANCH B separately identify:
+- new features
+- modified or removed behavior
+- bug fixes
+- architecture changes
+- protocol changes
+- UI/UX changes
+- file changes
+- version changes
+- new limitations or bugs
+- user corrections
+- unfinished work
+
+3. CLASSIFY POST-BRANCH CHANGES
+Classify meaningful changes as:
+- COMPATIBLE - both can coexist
+- SUPERSEDED - a newer accepted decision replaces an older one
+- A-ONLY - introduced only in A
+- B-ONLY - introduced only in B
+- CONFLICT - both branches changed the same behavior incompatibly
+- REGRESSION RISK - a change may have broken baseline or the other branch
+- UNKNOWN - evidence is insufficient
+
+Do not silently treat UNKNOWN as compatible.
+
+4. DECISION PRECEDENCE
+Resolve conflicts using:
+1) my newest explicit instruction in the current chat
+2) my newest explicit post-branch instruction
+3) a clearly newer user decision in either branch
+4) a later implementation that was actually adopted and continued
+5) shared baseline decisions
+6) assistant proposals never explicitly accepted
+
+Chronology alone is not enough if a newer branch change was experimental, rejected, or later reversed.
+
+5. POTENTIAL CONFLICT AUDIT
+Check specifically for conflicts involving:
+- project version and release identity
+- architecture
+- file/folder structure
+- APIs
+- authentication and OAuth scopes
+- extension/app IDs and persistent keys
+- database/storage schemas
+- data migration
+- configuration formats
+- naming and terminology
+- UI layout and interaction behavior
+- schedulers/background workers
+- permissions
+- security/privacy rules
+- dependencies
+- platform/browser assumptions
+- update procedures
+- backward compatibility
+- generated file formats
+- shared state touched through different code paths
+
+6. REGRESSION AUDIT
+Check whether either branch accidentally dropped functionality present in the baseline or the other branch. Absence in one branch is NOT proof of intentional deletion.
+
+Look for:
+- missing buttons/features
+- removed migration logic
+- stale configuration
+- localization gaps
+- older schemas restored accidentally
+- previously fixed bugs reintroduced
+- new code that breaks existing user data
+
+7. PROTOCOL RECONCILIATION
+Separate protocols into:
+- UNCHANGED BASELINE PROTOCOLS
+- NEW A PROTOCOLS
+- NEW B PROTOCOLS
+- CONFLICTING PROTOCOLS
+
+Repeated user corrections count as protocol updates. If a newer explicit protocol clearly supersedes an older one, apply the newer one. Otherwise preserve the conflict until it can be resolved safely.
+
+8. FILE RECONCILIATION
+Do not choose files by filename alone. Determine the common ancestor, A changes, B changes, and whether both sets of edits can coexist.
+
+Conceptually perform:
+BASELINE + A DIFF + B DIFF -> RECONCILED VERSION
+
+When edits affect separate functionality, preserve both. When they modify the same logic incompatibly, identify the conflict. Never overwrite a newer working implementation with an older complete file just because it contains more code.
+
+9. VERSION RECONSTRUCTION
+Establish:
+- baseline version/state
+- A latest state
+- B latest state
+- reconciled current state
+
+Do not blindly assume the highest version number is the final truth because branches may have advanced independently.
+
+10. MERGE STRATEGY
+The final state should normally equal:
+BASELINE
++ compatible A changes
++ compatible B changes
++ newest accepted decisions
+- obsolete decisions
+- confirmed regressions
+
+Do not remove a branch-specific feature merely because the other branch lacks it. Absence is not deletion unless the history shows removal was intentional.
+
+11. CONFLICT HANDLING
+If chronology and explicit user decisions resolve a conflict reliably, resolve it. If two valid incompatible directions remain and neither supersedes the other, do not guess. State concisely:
+- what A does
+- what B does
+- why they conflict
+- what single decision is required
+
+12. SECURITY AND DATA SAFETY
+Preserve stable IDs, OAuth configuration, secrets handling, data schemas, storage keys, migration requirements, and privacy protections when the history says they must remain stable. Never leak secrets or authentication material from either branch.
+
+13. RECONCILED CURRENT STATE
+After reconciliation, construct one internal CURRENT STATE containing:
+- current architecture
+- current version/state
+- active protocols and terminology
+- compatible features from both branches
+- resolved bug fixes
+- active files
+- unresolved conflicts
+- outstanding work
+- latest user direction
+
+Use this reconciled state for future work. Do not keep modifying only A or only B after reconciliation.
+
+14. INITIAL RECONCILIATION CHECK
+Before the first substantive response, internally establish:
+- shared baseline
+- approximate branch point
+- A-only changes
+- B-only changes
+- compatible changes
+- superseded changes
+- conflicts
+- regression risks
+- final protocols
+- latest usable files
+- reconciled current state
+
+Do not output a huge comparison automatically. If critical unresolved conflicts exist, provide only a concise Conflict Report for issues that materially affect the next task.
+
+FINAL RULE
+Treat the two packages as two branches of one historical project. Preserve the shared baseline, merge compatible post-branch improvements, prefer newer confirmed user decisions, detect regressions, surface real conflicts, and continue from the reconciled state rather than restarting the project.

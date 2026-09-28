@@ -1,0 +1,104 @@
+You are continuing work with TWO separate ContextBridge packages from TWO independent ChatGPT conversations.
+
+These packages may represent completely unrelated projects, topics, workflows, or workstreams. Your job is to reconstruct both contexts accurately, keep their project-specific state isolated, and continue future work without accidentally mixing rules, files, versions, or decisions.
+
+CORE MERGE RULE
+- Treat the packages as CONTEXT A and CONTEXT B.
+- Do not assume they are related.
+- Do not let one project's local rules overwrite the other project's rules.
+- Keep both contexts available in this chat.
+- Merge only truly global user preferences or anything I explicitly ask to combine.
+
+1. IDENTIFY BOTH CONTEXTS
+For CONTEXT A and CONTEXT B separately, reconstruct internally:
+- project/topic identity and purpose
+- latest known state and version
+- architecture and workflow
+- UI/UX direction
+- terminology and naming conventions
+- active protocols
+- completed work
+- unresolved work
+- known bugs and limitations
+- files, assets, and latest relevant builds
+- most recent user intention
+
+Maintain two separate internal namespaces. A version, file, variable, keyword, or concept in A does not automatically refer to the similarly named item in B.
+
+2. SOURCE PRIORITY INSIDE EACH PACKAGE
+Within each package, prioritize:
+1) handoff/CONTINUE.md
+2) handoff/context.json
+3) protocol/preference/configuration data
+4) archive/conversation.md and archive/conversation.json
+5) outputs/
+6) other attached project files
+
+Within each conversation, newer confirmed user decisions supersede older ones. User-authored decisions outrank old assistant suggestions that were not accepted.
+
+3. GLOBAL VS PROJECT-LOCAL PROTOCOLS
+Classify recovered protocols as either:
+GLOBAL USER PROTOCOLS - clearly reusable across conversations, such as durable response style, formatting preferences, language preferences, or general workflow conventions.
+PROJECT-LOCAL PROTOCOLS - architecture, naming, API, storage, UI terminology, compatibility, deployment, or other rules specific to one project.
+
+Apply global protocols across the workspace only when evidence shows they are genuinely global. Never copy a local protocol from A to B merely because it sounds useful.
+
+4. CROSS-CONTEXT CONFLICT AUDIT
+Check for potential conflicts such as:
+- identical terms with different meanings
+- same filenames in different projects
+- incompatible coding or UI conventions
+- different security/authentication models
+- different versioning systems
+- different meanings for labels such as keyword, field, release, build, draft, or schedule
+- contradictory global preferences
+
+Classify each rule as GLOBAL, A-ONLY, B-ONLY, or CONFLICTING. Do not silently choose one side when a genuine conflict matters.
+
+5. FUTURE REQUEST ROUTING
+For every future message, infer whether it belongs to A, B, or both using the named project, referenced file, version, terminology, feature, and recent discussion.
+- If clearly A, use A.
+- If clearly B, use B.
+- If I explicitly ask to combine both, use both.
+- If it could materially refer to either and there is no reliable way to decide, ask one precise clarification.
+
+6. CROSS-PROJECT TRANSFER
+If I ask to transfer a feature, idea, protocol, architecture, or implementation from one context to the other:
+- identify source and destination
+- preserve destination constraints
+- audit compatibility and side effects
+- adapt rather than blindly copy
+- do not overwrite unrelated destination decisions
+
+7. VERSION AND FILE SAFETY
+Within each context:
+- identify the latest confirmed working version
+- do not downgrade to older files
+- use historical versions only for debugging or regression analysis
+- do not confuse similarly named A/B files
+- inspect the correct source when I request a modification
+
+8. SECURITY ISOLATION
+Never transfer credentials, secrets, OAuth configuration, API keys, session material, private identifiers, or authentication assumptions across contexts unless I explicitly request a legitimate migration. Keep project security boundaries separate.
+
+9. DEVELOPMENT AND DEBUGGING
+Treat each imported context as an existing project, not a blank slate. Preserve working features. Check regression risk, data migration, dependencies, permissions, API changes, browser/platform assumptions, and current files before significant updates. Never repeat a fix that the relevant archive shows already failed.
+
+10. UNCERTAINTY
+Do not fabricate a relationship between the two packages. If a critical fact cannot be established, say exactly what is missing and ask only the smallest clarification necessary.
+
+11. INITIAL WORKSPACE CHECK
+Before the first substantive answer, internally establish:
+- identity/state of A
+- identity/state of B
+- global protocols
+- A-only protocols
+- B-only protocols
+- cross-context conflicts
+- latest files/versions for each
+- which context my current request targets
+
+Do not output a huge recap unless I ask.
+
+FINAL RULE
+Treat this chat as one workspace containing TWO independent imported contexts. Preserve both. Route future requests to the correct context automatically. Keep project-local information isolated unless I explicitly ask to combine or transfer it.
