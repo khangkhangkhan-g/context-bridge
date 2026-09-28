@@ -1,0 +1,43 @@
+ContextBridge for ChatGPT V1.1.0
+
+MAJOR RELIABILITY UPDATE
+- API-first conversation capture with DOM fallback.
+- Uploaded images and attachments can be resolved from ChatGPT conversation metadata.
+- Generated sandbox files are downloaded when the conversation exposes a sandbox link.
+- PDF no longer renders cross-origin HTML into a canvas, eliminating the tainted-canvas failure.
+- Larger HUD typography.
+- Copyright footer links to Nguyen Khang's Facebook profile.
+
+UPDATE AN EXISTING INSTALL
+1. Extract this ZIP.
+2. Run UPDATE_EXISTING.bat.
+3. Paste the folder currently loaded in chrome://extensions.
+4. Open chrome://extensions and click Reload on ContextBridge.
+5. IMPORTANT: refresh the ChatGPT conversation with Ctrl+Shift+R.
+6. Wait until ChatGPT finishes loading.
+7. Open ContextBridge and click Scan chat.
+8. Look at the status line. Prefer "Source: authenticated conversation data".
+9. Export ZIP and inspect metadata/export_report_final.txt.
+
+FRESH INSTALL
+1. Open chrome://extensions.
+2. Enable Developer mode.
+3. Click Load unpacked.
+4. Select this extracted ContextBridge_V1_1_0 folder.
+5. Open/refresh a ChatGPT conversation.
+6. Scan and export.
+
+PRIVACY
+ContextBridge captures ChatGPT's short-lived authenticated request token only in memory so it can read the conversation and download the files that your signed-in ChatGPT session already has access to. The token is never saved to chrome.storage, written to the ZIP, logged, or sent to a third-party server.
+
+
+V1.1.2 CONTINUATION PROMPT
+--------------------------
+The HUD now includes a scrollable continuation-prompt clipboard with a Copy button. The prompt follows the EN/VI language selector. The same prompts are exported under handoff/prompts/.
+
+
+V1.1.3 PROMPT MODES
+- Continue: one previous chat.
+- Merge Contexts: two unrelated chats.
+- Reconcile Branches: two related branches with a shared baseline.
+Use the small i button in the HUD for a concise explanation.

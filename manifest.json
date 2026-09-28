@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "ContextBridge for ChatGPT",
+  "version": "1.1.3",
+  "description": "Export a ChatGPT conversation into a portable ZIP archive and AI-ready handoff pack.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://*.oaiusercontent.com/*",
+    "https://*.oaistatic.com/*",
+    "https://*.openai.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*"
+      ],
+      "js": [
+        "hook-main.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*"
+      ],
+      "js": [
+        "hook-iso.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*"
+      ],
+      "js": [
+        "zip.js",
+        "pdf.js",
+        "api.js",
+        "normalize.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
