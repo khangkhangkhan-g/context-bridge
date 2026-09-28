@@ -14,6 +14,10 @@ A lightweight Chrome extension that exports a ChatGPT conversation into a portab
 ![Local First](https://img.shields.io/badge/Processing-Local--First-2E8B57)
 ![Version](https://img.shields.io/badge/Version-1.1.3-7A5AF8)
 
+<br>
+
+<a href="#english"><b>🇬🇧 English</b></a> &nbsp;•&nbsp; <a href="#vietnamese"><b>🇻🇳 Tiếng Việt</b></a>
+
 </div>
 
 ---
@@ -539,6 +543,10 @@ ContextBridge follows a simple principle:
 A useful AI conversation contains more than text. It contains decisions, constraints, files, versions, corrections, terminology, protocols, and project direction.
 
 ContextBridge attempts to package that working history so the next conversation can continue from where the previous one stopped.
+
+---
+
+<p align="right"><a href="#contextbridge-for-chatgpt">↑ Back to top</a></p>
 
 ---
 
@@ -1081,3 +1089,4 @@ These files make it easier to identify whether a problem comes from conversation
 
 Facebook: https://www.facebook.com/ngkph.m
 
+<p align="right"><a href="#contextbridge-for-chatgpt">↑ Back to top</a></p>
