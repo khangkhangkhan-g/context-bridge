@@ -16,7 +16,7 @@ A lightweight Chrome extension that exports a ChatGPT conversation into a portab
 
 <br>
 
-<a href="#english"><b>🇬🇧 English</b></a> &nbsp;•&nbsp; <a href="#vietnamese"><b>🇻🇳 Tiếng Việt</b></a>
+<a href="#english"><b>English</b></a> &nbsp;•&nbsp; <a href="#vietnamese"><b>Tiếng Việt</b></a>
 
 </div>
 
